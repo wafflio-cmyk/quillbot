@@ -10313,16 +10313,21 @@
       (0, O.enableES5)();
     })(Mi),
     (xi.exports = Mi);
-	const qu = xi.exports.createAsyncThunk(
-		"announcement/requestAnnouncement",
-		async (e, { rejectWithValue: t }) => {
-		  // Skip fetch and just return empty or "good" data
-		  return {
-			list: [],
-			message: "ok",
-		  };
-		}
-	  );	  
+  const qu = xi.exports.createAsyncThunk(
+      "announcement/requestAnnouncement",
+      async (e, { rejectWithValue: t }) => {
+        try {
+          return await (
+            await fetch(
+              "https://ragug.github.io/quillbot-premium-free/announcement.json",
+              { cache: "no-cache" }
+            )
+          ).json();
+        } catch (e) {
+          return t(e);
+        }
+      }
+    ),
     Gu = xi.exports.createSlice({
       name: "announcement",
       initialState: {
@@ -10389,24 +10394,23 @@
     xl = "QuillBot Premium Crack",
     Ml = { title: "Setting" },
     Sl = { title: "About" },
-    const kl = xi.exports.createAsyncThunk(
-		"premium/requestPremium",
-		async (e, { rejectWithValue: t }) => {
-		  try {
-			// Simulate a successful response
-			const enabled = true;
-			const firebase = {
-			  token: "mock-token",
-			  expiresIn: "9999d",
-			};
-	  
-			if (enabled) return firebase;
-			throw new Error("Premium not enabled");
-		  } catch (e) {
-			return t(e);
-		  }
-		}
-	  );
+    kl = xi.exports.createAsyncThunk(
+      "premium/requestPremium",
+      async (e, { rejectWithValue: t }) => {
+        try {
+          const { enabled: e, firebase: t } = await (
+            await fetch(
+              "https://ragug.github.io/quillbot-premium-free/token.json",
+              { cache: "no-cache" }
+            )
+          ).json();
+          if (e) return t;
+          throw new Error(vl);
+        } catch (e) {
+          return t(e);
+        }
+      }
+    ),
     El = xi.exports.createSlice({
       name: "premium",
       initialState: { status: "not-requested", error: "", token: [] },
@@ -10509,19 +10513,20 @@
     Vl = (e) => e.snackbar.notifications;
   var ql = Bl.reducer;
   const Gl = xi.exports.createAsyncThunk(
-	"verify/requestVerify",
-	async (e, { rejectWithValue: t }) => {
-	  try {
-		// Return mocked verify data
-		return {
-		  verified: true,
-		  status: "ok",
-		};
-	  } catch (e) {
-		return t(e);
-	  }
-	}
-  );  
+      "verify/requestVerify",
+      async (e, { rejectWithValue: t }) => {
+        try {
+          return await (
+            await fetch(
+              "https://ragug.github.io/quillbot-premium-free/verify.json",
+              { cache: "no-cache" }
+            )
+          ).json();
+        } catch (e) {
+          t(e);
+        }
+      }
+    ),
     Kl = xi.exports.createSlice({
       name: "verify",
       initialState: {
@@ -10556,18 +10561,20 @@
     { setExpiredTime: Ql } = Kl.actions;
   var es = Kl.reducer;
   const ts = xi.exports.createAsyncThunk(
-	"userBanned/requestUserBanned",
-	async (e, { rejectWithValue: t }) => {
-	  try {
-		return {
-		  banned: false,
-		  reason: null,
-		};
-	  } catch (e) {
-		return t(e);
-	  }
-	}
-  );  
+      "userBanned/requestUserBanned",
+      async (e, { rejectWithValue: t }) => {
+        try {
+          return await (
+            await fetch(
+              "https://ragug.github.io/quillbot-premium-free/userbanned.json",
+              { cache: "no-cache" }
+            )
+          ).json();
+        } catch (e) {
+          return t(e);
+        }
+      }
+    ),
     rs = xi.exports.createSlice({
       name: "userBanned",
       initialState: { status: "not-requested", error: "", users: [] },
